@@ -1,0 +1,287 @@
+{
+  "id": null,
+  "title": "Metrics with Druid",
+  "originalTitle": "Metrics with Druid",
+  "tags": [],
+  "style": "dark",
+  "timezone": "browser",
+  "editable": true,
+  "hideControls": false,
+  "sharedCrosshair": false,
+  "rows": [
+    {
+      "title": "test",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "panels": [
+        {
+          "id": 4,
+          "span": 12,
+          "type": "graph",
+          "x-axis": true,
+          "y-axis": true,
+          "scale": 1,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "max": null,
+            "min": null,
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "resolution": 100,
+          "lines": true,
+          "fill": 1,
+          "linewidth": 2,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "spyable": true,
+          "options": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "interactive": true,
+          "legend_counts": true,
+          "timezone": "browser",
+          "percentage": false,
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "query_as_alias": true,
+            "shared": false
+          },
+          "targets": [
+            {
+              "target": "",
+              "errors": {},
+              "queryType": "timeseries",
+              "currentFilter": {
+                "type": "selector"
+              },
+              "currentAggregator": {
+                "type": "count"
+              },
+              "currentPostAggregator": {
+                "type": "arithmetic",
+                "fn": "+"
+              },
+              "customGranularity": "minute",
+              "limit": 5,
+              "shouldOverrideGranularity": false,
+              "aggregators": [
+                {
+                  "type": "longSum",
+                  "name": "count",
+                  "fieldName": "count"
+                },
+                {
+                  "type": "longSum",
+                  "name": "value",
+                  "fieldName": "value"
+                }
+              ],
+              "postAggregators": [
+                {
+                  "type": "arithmetic",
+                  "fn": "/",
+                  "name": "avg",
+                  "fields": [
+                    {
+                      "type": "fieldAccess",
+                      "fieldName": "value"
+                    },
+                    {
+                      "type": "fieldAccess",
+                      "fieldName": "count"
+                    }
+                  ]
+                }
+              ],
+              "filters": [
+                {
+                  "type": "selector",
+                  "dimension": "name",
+                  "value": "query/time"
+                }
+              ],
+              "datasource": "metrics"
+            }
+          ],
+          "aliasColors": {},
+          "aliasYAxis": {},
+          "title": "Page Loads",
+          "datasource": "druid",
+          "renderer": "flot",
+          "annotate": {
+            "enable": false
+          },
+          "seriesOverrides": [],
+          "links": []
+        }
+      ]
+    },
+    {
+      "title": "New row",
+      "height": "250px",
+      "editable": true,
+      "collapse": false,
+      "panels": [
+        {
+          "title": "Popular pages",
+          "error": false,
+          "span": 12,
+          "editable": true,
+          "type": "graph",
+          "id": 5,
+          "datasource": null,
+          "renderer": "flot",
+          "x-axis": true,
+          "y-axis": true,
+          "y_formats": [
+            "short",
+            "short"
+          ],
+          "grid": {
+            "leftMax": null,
+            "rightMax": null,
+            "leftMin": null,
+            "rightMin": null,
+            "threshold1": null,
+            "threshold2": null,
+            "threshold1Color": "rgba(216, 200, 27, 0.27)",
+            "threshold2Color": "rgba(234, 112, 112, 0.22)"
+          },
+          "lines": true,
+          "fill": 0,
+          "linewidth": 1,
+          "points": false,
+          "pointradius": 5,
+          "bars": false,
+          "stack": false,
+          "percentage": false,
+          "legend": {
+            "show": true,
+            "values": false,
+            "min": false,
+            "max": false,
+            "current": false,
+            "total": false,
+            "avg": false
+          },
+          "nullPointMode": "connected",
+          "steppedLine": false,
+          "tooltip": {
+            "value_type": "cumulative",
+            "shared": false
+          },
+          "targets": [
+            {
+              "errors": {
+                "orderBy": "Must list columns to order by."
+              },
+              "queryType": "topN",
+              "currentFilter": {
+                "type": "selector"
+              },
+              "currentAggregator": {
+                "type": "count"
+              },
+              "currentPostAggregator": {
+                "type": "arithmetic",
+                "fn": "+"
+              },
+              "customGranularity": "minute",
+              "limit": 5,
+              "datasource": "metrics",
+              "metric": "count",
+              "dimension": "page",
+              "aggregators": [
+                {
+                  "type": "longSum",
+                  "name": "count",
+                  "fieldName": "count"
+                }
+              ],
+              "filters": [
+                {
+                  "type": "selector",
+                  "dimension": "name",
+                  "value": "query/time"
+                }
+              ]
+            }
+          ],
+          "aliasColors": {},
+          "seriesOverrides": [],
+          "links": []
+        }
+      ]
+    }
+  ],
+  "nav": [
+    {
+      "type": "timepicker",
+      "collapse": false,
+      "enable": true,
+      "status": "Stable",
+      "time_options": [
+        "5m",
+        "15m",
+        "1h",
+        "6h",
+        "12h",
+        "24h",
+        "2d",
+        "7d",
+        "30d"
+      ],
+      "refresh_intervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "now": true,
+      "notice": false
+    }
+  ],
+  "time": {
+    "from": "now-6h",
+    "to": "now",
+    "now": false
+  },
+  "templating": {
+    "list": [],
+    "enable": false
+  },
+  "annotations": {
+    "list": []
+  },
+  "refresh": false,
+  "version": 6,
+  "hideAllLegends": false
+}

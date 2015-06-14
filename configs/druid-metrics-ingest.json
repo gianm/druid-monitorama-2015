@@ -1,0 +1,65 @@
+[
+  {
+    "dataSchema" : {
+      "dataSource" : "metrics",
+      "parser" : {
+        "type" : "string",
+        "parseSpec" : {
+          "format" : "json",
+          "timestampSpec" : {
+            "column" : "timestamp",
+            "format" : "auto"
+          },
+          "dimensionsSpec" : {
+            "dimensions": null,
+            "dimensionExclusions" : [],
+            "spatialDimensions" : []
+          }
+        }
+      },
+      "metricsSpec" : [{
+        "type" : "count",
+        "name" : "count"
+      }, {
+        "type" : "doubleSum",
+        "name" : "value",
+        "fieldName" : "value"
+      }],
+      "granularitySpec" : {
+        "type" : "uniform",
+        "segmentGranularity" : "MINUTE",
+        "queryGranularity" : "NONE"
+      }
+    },
+    "ioConfig" : {
+      "type" : "realtime",
+      "firehose": {
+        "type": "kafka-0.8",
+        "consumerProps": {
+          "zookeeper.connect": "localhost:2181/kafka",
+          "zookeeper.connection.timeout.ms" : "15000",
+          "zookeeper.session.timeout.ms" : "15000",
+          "zookeeper.sync.time.ms" : "5000",
+          "group.id": "druid-metrics-ingest",
+          "fetch.message.max.bytes" : "1048586",
+          "auto.offset.reset": "largest",
+          "auto.commit.enable": "false"
+        },
+        "feed": "metrics"
+      },
+      "plumber": {
+        "type": "realtime"
+      }
+    },
+    "tuningConfig": {
+      "type" : "realtime",
+      "maxRowsInMemory": 75000,
+      "intermediatePersistPeriod": "PT10m",
+      "windowPeriod": "PT20S",
+      "basePersistDirectory": "realtimePersist",
+      "rejectionPolicy": {
+        "type": "serverTime"
+      }
+    }
+  }
+]

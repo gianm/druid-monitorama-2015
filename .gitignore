@@ -1,0 +1,6 @@
+*.tar.gz
+*.tgz
+/grafana-1.9.1
+/grafana-plugins
+/druid-0.7.3
+/kafka_2.10-0.8.2.1
