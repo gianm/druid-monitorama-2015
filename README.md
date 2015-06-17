@@ -1,3 +1,13 @@
+## About this repo
+
+This repo is a companion to the Druid workshop at [Monitorama 2015](http://monitorama.com/). The slides for that talk are
+here: https://speakerdeck.com/gianm/druid-at-monitorama-2015. Depending on when you're reading this, there may even be a video
+uploaded at the Monitorama site!
+
+You don't need to read the slides or watch the video to run through this tutorial, although
+they may be interesting if you want to learn more about Druid. They go into a little background about Druid's origins, how it
+works under the hood, and how people are using it in production.
+
 ## Druid as a metrics store
 
 Druid's strength is in powering analytical, slice-and-dice workflows on massive volumes of event data. It's a great
