@@ -26,15 +26,18 @@ You'll need a few things running for this setup:
 
 - [ZooKeeper](https://zookeeper.apache.org/), used by Kafka and Druid for coordination
 - [MySQL](https://www.mysql.com/), used by Druid for metadata storage
-- Either [S3](http://aws.amazon.com/s3/) or [HDFS](https://hadoop.apache.org/), used by Druid for data storage
 - [Kafka](http://kafka.apache.org/), used for data ingestion
 - [Grafana](http://grafana.org/), for visualizations
 - [Druid](http://druid.io/), of course!
 
 The following instructions will get you started with a single-machine deployment on a Mac. This should work pretty well
-for trying things out, but in production, you'll want to run ZooKeeper, Kafka, and Druid distributed across more than
-one machine. Generally ZooKeeper should run on 3 or 5 machines, and Kafka and Druid should run on as many machines as
-needed for your data volume.
+for trying things out, but in production, you'd want a couple of changes:
+
+- In production, ZooKeeper, Kafka, and Druid should be distributed across more than one machine. Generally ZooKeeper
+should run on 3 or 5 machines, and Kafka and Druid should run on as many machines as needed for your data volume.
+- This tutorial gets you running with data storage on the local filesystem. In production, you'd want to use durable,
+distributed storage. The most common choices are either [S3](http://aws.amazon.com/s3/) or
+[HDFS](https://hadoop.apache.org/).
 
 ### MySQL and ZooKeeper
 
